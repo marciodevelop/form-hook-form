@@ -6,11 +6,11 @@ Este é um projeto [Next.js](https://nextjs.org/) iniciado com [`create-next-app
 Primeiro, execute o servidor de desenvolvimento:
 
 npm run dev
-# ou
+### ou
 yarn dev
-# ou
+### ou
 pnpm dev
-# ou
+### ou
 bun dev
 
 ## Executando o "json-server" para o Banco de Dados Falso
@@ -18,7 +18,7 @@ bun dev
 Para rodar um banco de dados fake com o "json-server", execute o seguinte comando:
 
 npm run json-server
-# ou
+### ou
 yarn json-server
 
 Isso iniciará o "json-server" na porta 5000 e você poderá acessar os dados fake através de [http://localhost:5000](http://localhost:5000).
