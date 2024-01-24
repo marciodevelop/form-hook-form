@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { useFormContext, Controller, useForm } from "react-hook-form";
+import { useDebounce } from "@/app/hooks/useDebounce";
 
 interface IOptions {
   id: number
@@ -8,22 +9,34 @@ interface IOptions {
 }
 
 export const SearchInput = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IOptions[]>([]);
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('')
   const { control, formState: { errors } } = useFormContext();
+  const debounced = useDebounce(search, 1000)
   
-  const handleDataApi = async () => {
-    setLoading(true);
-    const request = await fetch('http://localhost:5000/data')
+  const handleDataApi = async (search: string) => {
+    try {
+      const request: [{ nome: string, id: number }] = await fetch(`http://localhost:5000/data`)
       .then(response => response.json());
-    setData(request);
+
+      const response = request.filter(({ nome }) => nome.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+      if(search){
+        setData(response);
+      }else{
+        setData([])
+      }
+    } catch (error) {
+      console.log('erro ao buscar dados')
+    }
+    
     setLoading(false);
   };
 
   useEffect(() => {
-    handleDataApi();
-  }, []);
+    handleDataApi(debounced);
+  }, [debounced]);
 
   return (
     <Controller
@@ -33,6 +46,9 @@ export const SearchInput = () => {
         <Autocomplete
           {...field}
           options={data}
+          onInputChange={(event, value) => {
+            setSearch(value)
+          }}
           getOptionLabel={(option) => option.nome || ""}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           loading={loading}
