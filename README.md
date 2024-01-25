@@ -9,16 +9,6 @@ pnpm dev
 ### ou
 bun dev
 
-## Executando o "json-server" para o Banco de Dados Falso
-
-Para rodar um banco de dados fake com o "json-server", execute o seguinte comando:
-
-npm run json-server
-### ou
-yarn json-server
-
-Isso iniciará o "json-server" na porta 5000 e você poderá acessar os dados fake através de [http://localhost:5000](http://localhost:5000).
-
 Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
 Você pode começar a editar a página modificando `app/page.tsx`. A página se atualiza automaticamente conforme você edita o arquivo.

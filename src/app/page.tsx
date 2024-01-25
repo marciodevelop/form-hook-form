@@ -9,8 +9,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const validateSchema = z.object({
-  pessoa: z.number().positive({
-    message: 'campo pessoa é obrigatório!'
+  produto: z.number().positive({
+    message: 'campo produto é obrigatório!'
   }),
   telefone: z.string().min(10, {
     message: 'digite pelo menos 10 números!'
@@ -24,7 +24,7 @@ export default function RegisterUser () {
 
   const methods = useForm({
     defaultValues: {
-      pessoa: 0,
+      produto: 0,
       telefone: null,
       email: null,
     },
@@ -59,7 +59,7 @@ export default function RegisterUser () {
             variant='outlined' 
             label='Email' 
             placeholder='email@email.com' />
-          <Button disabled={!!errors.email || !!errors.pessoa || !!errors.telefone} color='primary' type='submit' variant='contained'>enviar</Button>
+          <Button disabled={!!errors.email || !!errors.produto || !!errors.telefone} color='primary' type='submit' variant='contained'>enviar</Button>
         </Form>
         </ContentForm>
       </FormProvider>
